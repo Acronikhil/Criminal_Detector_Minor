@@ -33,7 +33,7 @@ class MyAccountManager(BaseUserManager):
     #     return user
 
 
-class MyAccountManager2(BaseUserManager):
+class MyAccountManagers(BaseUserManager):
     def create_user(self, name, gender, image, relativeContact, crimeDetail, address, contact):
         if not name:
             raise ValueError('Criminal must have Name')
@@ -73,7 +73,7 @@ class police(models.Model):
     is_active = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    objects = MyAccountManager2()
+    objects = MyAccountManager()
 
     def __str__(self):
         return self.name + ', Email: ' + self.email
@@ -95,10 +95,8 @@ class criminal(models.Model):
     # email = models.EmailField(max_length=254)
     gender = models.CharField(max_length=10)
     address = models.CharField(max_length=500)
-    objects = MyAccountManager2()
 
-    def __str__(self):
-        return self.name
+    objects = MyAccountManagers()
 
     def has_module_perms(self, app_lebel):
         return True

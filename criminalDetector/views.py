@@ -7,6 +7,8 @@ from .models import police, criminal
 # Create your views here.
 pol = police.objects.all()
 C = criminal.objects.all()
+pname = {}
+cn = ""
 
 
 def true(uname):
@@ -15,12 +17,53 @@ def true(uname):
             print("If true so number:", na)
 
 
+def index2(request):
+    if request.method == 'POST':
+        searchC = request.POST['searchC']
+
+        if criminal.objects.filter(name=searchC).exists():
+            messages.warning(request, "Criminal Found ")
+            global cn
+            cn = searchC
+    return redirect('index')
+
+
 def index(request):
 
-    # return HttpResponse("This is homePage")
-    # print("IDHAR HAI KYA:", email)
+    if request.method == 'POST':
+        name = request.POST['name']
+        gender = request.POST['gender']
+        contact = request.POST['contact']
+        relativeContact = request.POST['relativeContact']
+        image = request.FILES['image']
+        address = request.POST['address']
+        crimeDetail = request.POST['crimeDetail']
+        # searchC = request.POST['searchC']
+        # print('################### SearchC:', searchC)
 
-    return render(request, 'index.html', {'pol': pol, 'C': C})
+        # return render(request, 'index.html')
+
+        if criminal.objects.filter(name=name).exists():
+            messages.warning(request, "Criminal Already Exists")
+            return redirect('index')
+        else:
+            Cr = criminal.objects.create_user(
+                name=name, gender=gender, image=image, contact=contact, relativeContact=relativeContact, crimeDetail=crimeDetail, address=address)
+            print("Criminal Name:", name)
+            print("Gender:", gender)
+            print("Contact:", contact)
+            print("Relative Contact:", relativeContact)
+            print("Crime Detail:", crimeDetail)
+            print("Crime Address:", address)
+            print(Cr)
+            # pol.is_active = False
+            Cr.save()
+            print("Created CREATED")
+            messages.success(request, 'Criminal Registered Successfully')
+        return redirect('')
+    else:
+        # return HttpResponse("This is homePage")
+        return render(request, 'index.html', {'pol': pol, 'na': pname, 'C': C, 'cn': cn})
 
 
 def register(request):
@@ -35,6 +78,7 @@ def register(request):
         idPic = request.FILES['idPic']
         position = request.POST['position']
         contact = request.POST['contact']
+        searchC = request.POST['searchC']
 
         if password1 == password2:
             if police.objects.filter(name=name).exists():
@@ -87,7 +131,7 @@ def login(request):
         #     print(user)
         #     return redirect('login')
 
-        if police.objects.filter(email=email).exists():
+        if police.objects.filter(email=email).exists() & police.objects.filter(password=password).exists():
             data = {}
             messages.success(request, "Login Success")
             # pol = police.objects.filter(email=email).values()
@@ -96,9 +140,12 @@ def login(request):
             for na in pol:
                 if na.email == email:
                     data = na
-            print('=========:', na)
-            return render(request, 'index.html', {'pol': pol, 'na': data, 'C': C})
-            # return redirect('index')
+            print('=========:', data)
+            global pname
+            pname = data
+            print(pname)
+            # return render(request, 'index.html', {'pol': pol, 'na': data, 'C': C})
+            return redirect('index')
         else:
             messages.warning(request, 'Invalid Credentials')
             return redirect('login')
