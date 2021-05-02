@@ -32,55 +32,64 @@ Criminal Detector Home Page
     </nav>
     <section class="container bg-white pb-5 px-5 my-4">
         <h1 class="fs-1 text-center py-5 fw-bolder" id="regc">Register Criminal</h1>
-        <form class="row g-3">
+        <form class="row g-3 " action="index" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="col-md-12">
-                <label for="inputEmail4" class="form-label fs-5 fw-bold">Criminal
+                <label for="name" class="form-label fs-5 fw-bold">Criminal
                     Name</label>
-                <input type="text" class="form-control form-control-lg" id="name" placeholder="Criminal Name">
+                <input type="text" class="form-control form-control-lg" id="name" name="name"
+                    placeholder="Criminal Name" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
 
             <div class="form-check form-check-inline ms-3 col-md-auto">
-                <input class="form-check-input " type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Male"
+                <input class="form-check-input " type="radio" name="gender" id="inlineRadio1" value="Male" required
                     autofocus>
                 <label class="form-check-label fs-5" for="inlineRadio1">Male</label>
             </div>
             <div class="form-check form-check-inline col-md-auto">
-                <input class="form-check-input " type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                    value="Female">
+                <input class="form-check-input " type="radio" name="gender" id="inlineRadio2" value="Female" required>
                 <label class="form-check-label fs-5" for="inlineRadio2">Female</label>
             </div>
             <div class="form-check form-check-inline col-md-auto">
-                <input class="form-check-input " type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Other">
+                <input class="form-check-input " type="radio" name="gender" required id="inlineRadio3" value="Other">
                 <label class="form-check-label fs-5" for="inlineRadio3">Other</label>
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Phone No</span>
-                <input type="tel" class="form-control" aria-label="Sizing example input"
+                <input type="tel" name="contact" class="form-control" required aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default">Relative's Phone No</span>
-                <input type="tel" class="form-control" aria-label="Sizing example input"
+                <input type="tel" class="form-control" name="relativeContact" required aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label fs-5 fw-bold">Crime Detail</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" name="crimeDetail" required id="exampleFormControlTextarea1"
+                    rows="3"></textarea>
             </div>
             <div class="col-12">
                 <label for="inputAddress" class="form-label fs-5 fw-bold">Address</label>
-                <input type="text" class="form-control form-control-lg" id="inputAddress"
+                <input type="text" class="form-control form-control-lg" required name="address" id="inputAddress"
                     placeholder="Criminal's Address">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
             </div>
 
             <div class="input-group">
                 <label class="input-group-text fw-bold" for="inputGroupFile01">Upload Criminal Image</label>
-                <input type="file" class="form-control fw-bold" id="inputGroupFile01">
+                <input type="file" accept="image/*" class="form-control fw-bold" required name="image"
+                    id="inputGroupFile01">
             </div>
 
             <div class="col-12">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
                     <label class="form-check-label" for="gridCheck">
                         Check me out
                     </label>
@@ -97,10 +106,96 @@ Criminal Detector Home Page
 
     <section class="container bg-white pb-5 px-5 my-4">
         <h1 class="fs-1 text-center py-5 fw-bolder" id="searchC">Search Criminal</h1>
-        <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search Criminal Here" aria-label="Search">
+        <form class="d-flex my-5 " method="POST" action="index2">
+            {%csrf_token%}
+            <input class="form-control me-2" name="searchC" type="search" placeholder="Search Criminal Here"
+                aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        {% for c in C %}
+        {% if c.name == cn%}
+        <!-- <table class="table caption-top">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" class="col-md-2 text-left">Name</th>
+                    <th scope="col-12" class="col-md-auto text-left">Crime Detail</th>
+                    <th scope="col" class="col-md-2 text-left">Contact</th>
+                    <th scope="col" class="col-md-2 text-left">Relative Contact</th>
+                    <th scope="col" class=" text-left">Gender</th>
+                    <th scope="col" class="col-md-1 text-left">Address</th>
+                    <th scope="col" class="col-md-1 text-left">Image</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr class="fs-6 fw-bold">
+                    <th scope="row" class="text-left align-middle fs-5">{{c.id}}</th>
+                    <td class="col-md-2 text-left align-middle fs-5">{{c.name}}</td>
+                    <td class="col-md-auto  text-left align-middle fs-5">{{c.crimeDetail}}</td>
+                    <td class="col-md-2 text-left align-middle fs-5">{{c.contact}}</td>
+                    <td class="col-md-2 text-left align-middle fs-5">{{c.relativeContact}}</td>
+                    <td class="col-md-1 text-left align-middle fs-5">{{c.gender}}</td>
+                    <td class="col-md-1 text-truncate text-left align-middle fs-5">{{c.address}}</td>
+
+                    <td class=""><img src="{{c.image.url}}"
+                            style="width: 120px !important; height: 120px!important; object-fit: cover;"
+                            class="img-thumbnail" alt="{{c.name}}"></td>
+                </tr> -->
+
+        <form class="row g-3 " action="index" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <img src="{{c.image.url}}" class="img-fluid mx-auto  " alt="Responsive image"
+                style="width: 200px; height: 200px; object-fit: cover;">
+            <div class="col-md-12">
+                <label for="name" class="form-label fs-5 fw-bold">Criminal
+                    Name</label>
+                <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{c.name}}"
+                    placeholder="Criminal Name" disabled required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
+            <div class="form-check form-check-inline ms-3 col-md-auto">
+                <input class="form-check-input " type="radio" name="" checked>
+                <label class="form-check-label fs-5 fw-bold" for="">{{c.gender}}</label>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Phone No</span>
+                <input type="tel" name="contact" class="form-control" value="{{c.contact}}" required
+                    aria-label="Sizing example input" disabled aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Relative's Phone No</span>
+                <input type="tel" class="form-control" name="relativeContact" value="{{c.relativeContact}}" required
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label fs-5 fw-bold">Crime Detail</label>
+                <input type="text" class="form-control form-control-lg" required name="address" id="inputAddress"
+                    placeholder="Criminal's Address" value="{{c.crimeDetail}}" disabled>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label fs-5 fw-bold">Address</label>
+                <input type="text" class="form-control form-control-lg" required name="address" id="inputAddress"
+                    placeholder="Criminal's Address" value="{{c.address}}" disabled>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
+
+
+
+        </form>
+        {% endif%}
+        {% endfor %}
+        </tbody>
+        </table>
     </section>
 
     <section class="container-fluid bg-white pb-5 px-5 my-4">
@@ -126,7 +221,9 @@ Criminal Detector Home Page
                 <td class="col-md-2 text-left align-middle fs-5">{{c.contact}}</td>
                 <td class="col-md-2 text-left align-middle fs-5">{{c.relativeContact}}</td>
                 <td class="col-md-1 text-left align-middle fs-5">{{c.gender}}</td>
-                <td class=""><img src="{{c.image.url}}" class="img-thumbnail" alt="{{c.name}}"></td>
+                <td class=""><img src="{{c.image.url}}"
+                        style="width: 120px !important; height: 120px!important; object-fit: cover;"
+                        class="img-thumbnail" alt="{{c.name}}"></td>
             </tr>
             {% endfor %}
             <tbody>
