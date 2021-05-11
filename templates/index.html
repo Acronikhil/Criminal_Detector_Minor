@@ -106,12 +106,17 @@ Criminal Detector Home Page
 
     <section class="container bg-white pb-5 px-5 my-4">
         <h1 class="fs-1 text-center py-5 fw-bolder" id="searchC">Search Criminal</h1>
+        <a href="sbp" class=" btn fs-1 btn-warning text-center py-5 fw-bolder"
+            style="margin: 1em 36%; width: fit-content!important;" id="searchC">Search
+            By Image</a>
+        <h1 class="text-center fs-1">OR</h1>
         <form class="d-flex my-5 " method="POST" action="index2">
             {%csrf_token%}
             <input class="form-control me-2" name="searchC" type="search" placeholder="Search Criminal Here"
                 aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+
         {% for c in C %}
         {% if c.name == cn%}
         <!-- <table class="table caption-top">

@@ -45,6 +45,11 @@ class MyAccountManagers(BaseUserManager):
         users.save(using=self._db)
         return users
 
+    def addImg(self, image):
+        sImage = self.model(image=image)
+        # print("Request to save image as:", image)
+        sImage.save(using=self._db)
+        return sImage
     # def create_superuser(self, email, name, password, gender):
     #     user = self.model(email=self.normalize_email(email),
     #                       name=name, password=password, gender=gender)
@@ -100,3 +105,8 @@ class criminal(models.Model):
 
     def has_module_perms(self, app_lebel):
         return True
+
+
+class searches(models.Model):
+    image = models.ImageField(upload_to='Searched_Criminals')
+    objects = MyAccountManagers()

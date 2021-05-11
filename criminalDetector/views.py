@@ -2,13 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
-from .models import police, criminal
+from .models import police, criminal, searches
+from .ml import *
+from playsound import playsound
 
 # Create your views here.
 pol = police.objects.all()
 C = criminal.objects.all()
 pname = {}
 cn = ""
+crn = ""
 
 
 def true(uname):
@@ -29,7 +32,7 @@ def index2(request):
 
 
 def index(request):
-
+    playsound("static./yw.mp3")
     if request.method == 'POST':
         name = request.POST['name']
         gender = request.POST['gender']
@@ -67,6 +70,9 @@ def index(request):
 
 
 def register(request):
+    if pname == NULL:
+        global cn
+        cn = ""
 
     if request.method == 'POST':
         email = request.POST['email']
@@ -117,25 +123,10 @@ def login(request):
         # print("email:", username)
         print("Password:", password)
 
-        # user = auth.authenticate(email=email,password=password)
-
-        # user = auth.authenticate(username=username, password=password)
-
-        # if user is not None:
-        #     auth.login(request, user)
-        #     messages.success(request, "Login Successfull")
-        #     print(user)
-        #     return redirect('index')
-        # else:
-        #     messages.warning(request, 'Invalid Credentials')
-        #     print(user)
-        #     return redirect('login')
-
         if police.objects.filter(email=email).exists() & police.objects.filter(password=password).exists():
             data = {}
             messages.success(request, "Login Success")
-            # pol = police.objects.filter(email=email).values()
-            # print("XXXXXXXX:", pol)
+
             true(email)
             for na in pol:
                 if na.email == email:
@@ -153,6 +144,44 @@ def login(request):
     else:
         # return HttpResponse("This is homePage")
         return render(request, 'login.html')
+
+
+def sbp(request):
+    crn = "NOT"
+    if request.method == 'POST':
+        image = request.FILES['image']
+        print("XXXXXXX", image)
+        toSearch = "Searched_Criminals/" + str(image)
+        print("To Search bef check:", toSearch)
+        if searches.objects.filter(image=image).exists():
+            messages.warning(request, "Change Image Name")
+        else:
+
+            S = searches.objects.addImg(
+                image=image)
+            # S.save()
+            # messages.success(request, "Image Saved")
+            print("SAved image as:", toSearch)
+            # print(f'../media/{toSearch}')
+            crn = detect(toSearch)
+            if crn == 'NOT FOUND':
+                messages.warning(request, "Criminal Not Found In Database")
+                crn = "NOT FOUND"
+                playsound('static/cnf.mp3')
+            else:
+                messages.warning(request, "Criminal Found")
+                print(f'Data agaya :{crn}')
+                crn = "Criminal_Images/" + crn
+                print("AB KYA AYA:", crn)
+                crn = criminal.objects.filter(image=crn).values('name')
+                print('##########', crn)
+                playsound('static/audio.mp3')
+                playsound('static/dcf.mp3')
+
+            # global cn
+        print("To Search af check:", toSearch)
+    print("im working")
+    return render(request, 'sbp.html', {'pol': pol, 'na': pname, 'C': C, 'crn': crn})
 
 
 def logout(request):
