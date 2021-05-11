@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}
+Criminal Detector Home Page
+{% endblock title %}
+{% block sbp %}
+<section class="container-fluid home pt-2 py-5 " style="height: 100vh!important;">
+    <nav class="navbar my-0 py-0 navbar-expand-lg bg-dark navbar-dark d-flex justify-content-lg-center">
+        <!-- PIC -->
+        <a class="navbar-brand my-0" href="#">
+            <img src="{{na.image.url}}" alt="logo" style="width:150px; height: 150px; object-fit: cover;">
+        </a>
+        <H1 class="text-light ">Hello {{na.name}}</H1>
+
+
+        <div class="btn-group  mx-sm-auto">
+            <a href="#regc" class="btn btn-success " aria-current="page">Register Criminal</a>
+            <a href="#searchC" class="btn btn-success">Search Criminal</a>
+            <a href="#allC" class="btn btn-success">See All Criminal</a>
+
+        </div>
+        <div class="ms-md-auto text-md-start mt-1 ">
+            <h6 class="text-light">Contact: {{na.contact}}</h6>
+            <h6 class="text-light">Email: {{na.email}}</h6>
+            <h6 class="text-light">Gender: <span class="text-uppercase">{{na.gender}}</span></h6>
+
+            <h6 class="text-light">Designation: {{na.position}}</h6>
+
+        </div>
+
+        <div class="ms-auto "><a href="logout"><button type="button" class="btn btn-success">LogOut</button></a></div>
+
+    </nav>
+    <section class="container bg-white py-5 pb-5 px-5 my-4">
+        <form class="form-inline" method="POST" action="sbp" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="input-group" style="width: 100%!important;">
+                <label class="input-group-text fw-bold" for="inputGroupFile01">Upload Criminal Image</label>
+                <input type="file" accept="image/*" class="form-control fw-bold" required name="image"
+                    id="inputGroupFile01">
+            </div>
+            <button type="submit" class="mx-auto mt-3 fs-5 fw-bold btn btn-warning">Search</button>
+        </form>
+    </section>
+    {% if crn != "NOT FOUND" %}
+    <section class="container-fluid bg-white py-5 pb-5 px-5 my-4">
+        <table class="table table-hover">
+            <thead>
+                <tr class="fs-5">
+                    <th scope="col">#</th>
+                    <th scope="col" class="col-md-2 text-left">Name</th>
+                    <th scope="col-12" class="col-md-auto text-left">Crime Detail</th>
+                    <th scope="col" class="col-md-2 text-left">Contact</th>
+                    <th scope="col" class="col-md-2 text-left">Relative Contact</th>
+                    <th scope="col" class="col-md-1 text-left">Gender</th>
+                    <th scope="col" class="col-md-1 text-left">Image</th>
+                </tr>
+            </thead>
+            {% for crn in crn %}
+            {% for c in C%}
+            {% if crn.name == c.name %}
+
+
+            <tr class="fs-6 fw-bold">
+                <th scope="row" class="text-left align-middle fs-5">{{c.id}}</th>
+                <td class="col-md-2 text-left align-middle fs-5">{{c.name}}</td>
+                <td class="col-md-auto text-left align-middle fs-5">{{c.crimeDetail}}</td>
+                <td class="col-md-2 text-left align-middle fs-5">{{c.contact}}</td>
+                <td class="col-md-2 text-left align-middle fs-5">{{c.relativeContact}}</td>
+                <td class="col-md-1 text-left align-middle fs-5">{{c.gender}}</td>
+                <td class=""><img src="{{c.image.url}}"
+                        style="width: 120px !important; height: 120px!important; object-fit: cover;"
+                        class="img-thumbnail" alt="{{c.name}}"></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            <tbody>
+        </table>
+    </section>
+    {% endif %}
+</section>
+{%endblock sbp%}
