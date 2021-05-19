@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+{% block title %}
+Edit Criminal
+{% endblock title %}
+{% block body %}
+<section class="container-fluid home pt-2 py-5 ">
+    <nav class="navbar my-0 py-0 navbar-expand-lg bg-dark navbar-dark d-flex justify-content-lg-center">
+        <!-- PIC -->
+        <a class="navbar-brand my-0" href="#">
+            <img src="{{na.image.url}}" alt="logo" style="width:150px; height: 150px; object-fit: cover;">
+        </a>
+        <H1 class="text-light ">Hello {{na.name}}</H1>
+
+
+        <div class="btn-group  mx-sm-auto">
+            <a href="#regc" class="btn btn-success " aria-current="page">Register Criminal</a>
+            <a href="#searchC" class="btn btn-success">Search Criminal</a>
+            <a href="#allC" class="btn btn-success">See All Criminal</a>
+
+        </div>
+        <div class="ms-md-auto text-md-start mt-1 ">
+            <h6 class="text-light">Contact: {{na.contact}}</h6>
+            <h6 class="text-light">Email: {{na.email}}</h6>
+            <h6 class="text-light">Gender: <span class="text-uppercase">{{na.gender}}</span></h6>
+
+            <h6 class="text-light">Designation: {{na.position}}</h6>
+
+        </div>
+
+        <div class="ms-auto ">
+            <div onclick="document.location.href='../index';"
+                class="btn btn-outline-warning w3-hover-text-black fw-bold">Home</div>
+            <a href="../logout"><button type="button" class="btn btn-success">LogOut</button></a>
+        </div>
+
+    </nav>
+    <!-- <section class="container bg-white pb-5 px-5 my-4">
+        <h1 class="fs-1 text-center py-5 fw-bolder" id="regc">Register Criminal</h1>
+        <form class="row g-3 " action="index" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="col-md-12">
+                <label for="name" class="form-label fs-5 fw-bold">Criminal
+                    Name</label>
+                <input type="text" class="form-control form-control-lg" id="name" name="name"
+                    placeholder="Criminal Name" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
+            <div class="form-check form-check-inline ms-3 col-md-auto">
+                <input class="form-check-input " type="radio" name="gender" id="inlineRadio1" value="Male" required
+                    autofocus>
+                <label class="form-check-label fs-5" for="inlineRadio1">Male</label>
+            </div>
+            <div class="form-check form-check-inline col-md-auto">
+                <input class="form-check-input " type="radio" name="gender" id="inlineRadio2" value="Female" required>
+                <label class="form-check-label fs-5" for="inlineRadio2">Female</label>
+            </div>
+            <div class="form-check form-check-inline col-md-auto">
+                <input class="form-check-input " type="radio" name="gender" required id="inlineRadio3" value="Other">
+                <label class="form-check-label fs-5" for="inlineRadio3">Other</label>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Phone No</span>
+                <input type="tel" name="contact" class="form-control" required aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Relative's Phone No</span>
+                <input type="tel" class="form-control" name="relativeContact" required aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label fs-5 fw-bold">Crime Detail</label>
+                <textarea class="form-control" name="crimeDetail" required id="exampleFormControlTextarea1"
+                    rows="3"></textarea>
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label fs-5 fw-bold">Address</label>
+                <input type="text" class="form-control form-control-lg" required name="address" id="inputAddress"
+                    placeholder="Criminal's Address">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="input-group-text fw-bold" for="inputGroupFile01">Upload Criminal Image</label>
+                <input type="file" accept="image/*" class="form-control fw-bold" required name="image"
+                    id="inputGroupFile01">
+            </div>
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
+                    <label class="form-check-label" for="gridCheck">
+                        Check me out
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-12 align-middle">
+                <button type="submit" style="width: fit-content!important;" class="p-3 fw-bolder btn btn-success ">Add
+                    Criminal</button>
+            </div>
+        </form>
+
+    </section> -->
+
+    <section class="container bg-white pb-5 px-5 my-4">
+        <h1 class="fs-1 text-center py-5 fw-bolder" id="searchC">Edit Criminal</h1>
+
+        <form class="row g-3 " action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <img src="{{c.image.url}}" class="img-fluid mx-auto  " alt="Responsive image"
+                style="width: 200px; height: 200px; object-fit: cover;">
+            <div class="col-md-12">
+                <label for="name" class="form-label fs-5 fw-bold">Criminal
+                    Name</label>
+                <input type="text" class="form-control form-control-lg" id="name" value="{{c.name}}"
+                    placeholder="Criminal Name" disabled required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
+            <div class="form-check form-check-inline ms-3 col-md-auto">
+                <input class="form-check-input " type="radio" name="" checked>
+                <label class="form-check-label fs-5 fw-bold" for="">{{c.gender}}</label>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Phone No</span>
+                <input type="tel" name="contact" class="form-control" value="{{c.contact}}" required
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Relative's Phone No</span>
+                <input type="tel" class="form-control" name="relativeContact" value="{{c.relativeContact}}" required
+                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label fs-5 fw-bold">Crime Detail</label>
+                <input type="text" class="form-control form-control-lg" required name="crimeDetail" id="inputAddress"
+                    placeholder="Criminal's Address" value="{{c.crimeDetail}}">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label fs-5 fw-bold">Address</label>
+                <input type="text" class="form-control form-control-lg" required name="address" id="inputAddress"
+                    placeholder="Criminal's Address" value="{{c.address}}">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+
+
+            <div class="col-12 w3-center ">
+                <button type="submit" style="width: fit-content!important;"
+                    class="p-3 fw-bolder btn btn-success ">UPDATE</button>
+            </div>
+
+        </form>
+
+        </tbody>
+        </table>
+    </section>
+
+    <!-- <section class="container-fluid bg-white pb-5 px-5 my-4">
+        <h1 class="fs-1 text-center py-5 fw-bolder" id="allC">All Criminals</h1>
+
+        <table class="table table-hover overflow-auto" style="height: auto;">
+            <thead>
+                <tr class="fs-5">
+                    <th scope="col">#</th>
+                    <th scope="col" class="col-md-2 text-left">Name</th>
+                    <th scope="col-12" class="col-md-auto text-left">Crime Detail</th>
+                    <th scope="col" class="col-md-2 text-left">Contact</th>
+                    <th scope="col" class="col-md-2 text-left">Relative Contact</th>
+                    <th scope="col" class="col-md-1 text-left">Gender</th>
+                    <th scope="col" class="col-md-1 text-left">Image</th>
+                </tr>
+            </thead>
+            {% for c in C %}
+            <tr class="fs-6 fw-bold">
+                <th scope="row" class="text-left align-middle fs-5">{{c.id}}</th>
+                <td class="col-md-2 text-left align-middle fs-5">{{c.name}}</td>
+                <td class="col-md-auto overflow-auto text-wrap text-left align-middle fs-5">{{c.crimeDetail}}</td>
+                <td class="col-md-2 text-left align-middle fs-5">{{c.contact}}</td>
+                <td class="col-md-2 text-left align-middle fs-5">{{c.relativeContact}}</td>
+                <td class="col-md-1 text-left align-middle fs-5">{{c.gender}}</td>
+                <td class=""><img src="{{c.image.url}}"
+                        style="width: 120px !important; height: 120px!important; object-fit: cover;"
+                        class="img-thumbnail" alt="{{c.name}}"></td>
+                <td onClick="document.location.href='edit/{{c.id}}';" style="cursor: pointer;"
+                    class="align-middle  w3-hover-black"><a href='#/edit/{{c.id}}'><i
+                            class="fas fa-edit text-success fs-3"></i></a></td>
+                <td onClick="document.location.href='/delete/{{c.id}}';" style="cursor: pointer;"
+                    class="align-middle  w3-hover-black"><a href='#/delete/{{c.id}}'><i
+                            class="fas fa-trash-alt text-danger fs-3 "></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+            <tbody>
+        </table>
+    </section> -->
+
+</section>
+{% endblock body %}
