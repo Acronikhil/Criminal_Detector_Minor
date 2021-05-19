@@ -29,7 +29,7 @@ DEBUG = True
 # ALLOWED_HOSTS = []
 # afb3302fca0a.ngrok.io
 
-ALLOWED_HOSTS = ['1f893c925214.ngrok.io', '127.0.0.1','973826bc677a.ngrok.io','5d47a221f626.ngrok.io']
+ALLOWED_HOSTS = ['127.0.0.1','77bd219d83f8.ngrok.io']
 
 # Application definition
 
