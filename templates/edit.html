@@ -6,19 +6,19 @@ Edit Criminal
 <section class="container-fluid home pt-2 py-5 ">
     <nav class="navbar my-0 py-0 navbar-expand-lg bg-dark navbar-dark d-flex justify-content-lg-center">
         <!-- PIC -->
-        <a class="navbar-brand my-0" href="#">
+        <a class="navbar-brand sm my-0" href="#">
             <img src="{{na.image.url}}" alt="logo" style="width:150px; height: 150px; object-fit: cover;">
         </a>
-        <H1 class="text-light ">Hello {{na.name}}</H1>
+        <H1 class="text-light sm  fs-3">Hello {{na.name}}</H1>
 
 
-        <div class="btn-group  mx-sm-auto">
-            <a href="#regc" class="btn btn-success " aria-current="page">Register Criminal</a>
-            <a href="#searchC" class="btn btn-success">Search Criminal</a>
-            <a href="#allC" class="btn btn-success">See All Criminal</a>
+        <div class="btn-group sm  mx-auto">
+            <a href="../../index#regc" class="btn btn-success " aria-current="page">Register Criminal</a>
+            <a href="../../index#searchC" class="btn btn-success">Search Criminal</a>
+            <a href="../../index#allC" class="btn btn-success">See All Criminal</a>
 
         </div>
-        <div class="ms-md-auto text-md-start mt-1 ">
+        <div class="ms-md-auto sm text-md-start mt-1 ">
             <h6 class="text-light">Contact: {{na.contact}}</h6>
             <h6 class="text-light">Email: {{na.email}}</h6>
             <h6 class="text-light">Gender: <span class="text-uppercase">{{na.gender}}</span></h6>
@@ -27,7 +27,7 @@ Edit Criminal
 
         </div>
 
-        <div class="ms-auto ">
+        <div class="ms-auto sm">
             <div onclick="document.location.href='../index';"
                 class="btn btn-outline-warning w3-hover-text-black fw-bold">Home</div>
             <a href="../logout"><button type="button" class="btn btn-success">LogOut</button></a>
