@@ -6,19 +6,20 @@ Home
 <section class="container-fluid home pt-2 py-5 ">
     <nav class="navbar my-0 py-0 navbar-expand-lg bg-dark navbar-dark d-flex justify-content-lg-center">
         <!-- PIC -->
-        <a class="navbar-brand my-0" href="#">
-            <img src="{{na.image.url}}" alt="logo" style="width:150px; height: 150px; object-fit: cover;">
+        <a class="navbar-brand sm my-0" href="#">
+            <img src="{{na.image.url}}" id='myImg' alt="{{na.name}}"
+                style="width:150px; height: 150px; object-fit: cover;">
         </a>
-        <H1 class="text-light ">Hello {{na.name}}</H1>
+        <h1 class="text-light sm fs-3">Hello<br> {{na.name}}</h1>
 
 
-        <div class="btn-group  mx-sm-auto">
-            <a href="#regc" class="btn btn-success " aria-current="page">Register Criminal</a>
+        <div class="btn-group sm mx-auto">
+            <a href="#regc" class="btn  btn-success" aria-current="page">Register Criminal</a>
             <a href="#searchC" class="btn btn-success">Search Criminal</a>
             <a href="#allC" class="btn btn-success">See All Criminal</a>
 
         </div>
-        <div class="ms-md-auto text-md-start mt-1 ">
+        <div class="ms-md-auto sm text-md-start mt-1 ">
             <h6 class="text-light">Contact: {{na.contact}}</h6>
             <h6 class="text-light">Email: {{na.email}}</h6>
             <h6 class="text-light">Gender: <span class="text-uppercase">{{na.gender}}</span></h6>
@@ -27,7 +28,8 @@ Home
 
         </div>
 
-        <div class="ms-auto "><a href="logout"><button type="button" class="btn btn-success">LogOut</button></a></div>
+        <div class="ms-auto sm "><a href="logout"><button type="button" class="btn btn-success">LogOut</button></a>
+        </div>
 
     </nav>
     <section class="container bg-white pb-5 px-5 my-4">
@@ -82,21 +84,21 @@ Home
             </div>
 
             <div class="input-group">
-                <label class="input-group-text fw-bold" for="inputGroupFile01">Upload Criminal Image</label>
-                <input type="file" accept="image/*" class="form-control fw-bold" required name="image"
+                <label class="input-group-text fw-bold" for="inputGroupFile01">Criminal Image</label>
+                <input type="file" accept="image/*" class="form-control  fw-bold" required name="image"
                     id="inputGroupFile01">
             </div>
 
             <div class="col-12">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
-                    <label class="form-check-label" for="gridCheck">
+                    <input class="form-check-input " type="checkbox" id="gridCheck" required>
+                    <label class="form-check-label fs-6" for="gridCheck">
                         Check me out
                     </label>
                 </div>
             </div>
 
-            <div class="col-12 align-middle">
+            <div class="col-12 w3-center">
                 <button type="submit" style="width: fit-content!important;" class="p-3 fw-bolder btn btn-success ">Add
                     Criminal</button>
             </div>
@@ -106,9 +108,11 @@ Home
 
     <section class="container bg-white pb-5 px-5 my-4">
         <h1 class="fs-1 text-center py-5 fw-bolder" id="searchC">Search Criminal</h1>
-        <a href="sbp" class=" btn fs-1 btn-warning text-center py-5 fw-bolder"
-            style="margin: 1em 36%; width: fit-content!important;" id="searchC">Search
-            By Image</a>
+        <div class="w3-center my-3">
+            <a href="sbp" class=" btn fs-1 btn-warning w3-center text-center p-5 fw-bolder"
+                style=" width: fit-content!important;" id="searchC">Search
+                By Image</a>
+        </div>
         <h1 class="text-center fs-1">OR</h1>
         <form class="d-flex my-5 " method="POST" action="index2">
             {%csrf_token%}
@@ -235,8 +239,8 @@ Home
                     <td class=" text-center align-middle fs-5">{{c.relativeContact}}</td>
                     <td class=" text-center align-middle fs-5">{{c.gender}}</td>
                     <td class="text-center text-justify align-middle fs-5">{{c.address}}</td>
-                    <td class="w3-center"><img id="myImg" src="{{c.image.url}}"
-                            style="width: 150px !important; height: 150px!important; object-fit: cover;"
+                    <td class="w3-center fm"><img id="myImg" src="{{c.image.url}}"
+                            style="width: 20vw !important; height: 20vh!important; object-fit: cover;"
                             class="img-thumbnail" alt="{{c.name}}"></td>
                     <td onClick="document.location.href='edit/{{c.id}}';" style="cursor: pointer;"
                         class="align-middle w3-center w3-hover-black"><a href='edit/{{c.id}}'><i

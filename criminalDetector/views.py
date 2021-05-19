@@ -197,8 +197,8 @@ def login(request):
                 pname = data
                 print(pname)
                 playsound('static/yw.mp3')
-                # return render(request, 'index.html', {'pol': pol, 'na': data, 'C': C})
-                return redirect('index')
+                return render(request, 'index.html', {'pol': pol, 'na': data, 'C': C})
+                # return redirect('index')
             else:
                 print("INSIDE ELSE VALUE OF P.IS_ACTIVE:", P.is_active)
                 messages.warning(request, "You Are Not Verfied Yet")

@@ -308,15 +308,14 @@ input::placeholder {
 }
 ::-webkit-scrollbar {
   width: 2px !important;
-  background-color: #6f00ed !important;
+  height: 0.2rem;
 }
-::-webkit-scrollbar:hover {
+::-webkit-scrollbar-thumb:hover {
   width: 5px !important;
-  background-color: #6f00ed !important;
+  height: 2rem;
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px #6f00ed !important;
   border-radius: 10px !important;
   background-color: #758283 !important;
   border-left: 0.5px solid #242b2e !important;
@@ -338,7 +337,6 @@ input::placeholder {
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px #6f00ed !important;
   border-radius: 10px !important;
   background-color: #141616 !important;
   border-left: 0.5px solid #242b2e !important;
@@ -398,7 +396,7 @@ input:-ms-input-placeholder {
 }
 
 input::placeholder {
-  font-size: 1.2rem;
+  font-size: 0.85rem;
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   letter-spacing: 0.1rem;
@@ -462,7 +460,7 @@ input::placeholder {
   }
 }
 
-/* Page background */
+/* /* Page background  */
 .user {
   display: flex;
   justify-content: center;
@@ -501,13 +499,12 @@ input::placeholder {
 .user_registered-title,
 .user_unregistered-title {
   margin-bottom: 15px;
-  font-size: 2.66rem;
   line-height: 1em;
 }
 
 .user_unregistered-text,
 .user_registered-text {
-  font-size: 1rem;
+  font-size: 0.83rem;
   line-height: 1.4em;
 }
 
@@ -538,12 +535,12 @@ input::placeholder {
 
 @keyframes text2 {
   0% {
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 700;
   }
 
   100% {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 900;
   }
 }
@@ -554,17 +551,17 @@ input::placeholder {
   top: 50%;
   left: 30px;
   width: calc(50% - 30px);
-  min-height: 800px !important;
+  min-height: 80vh !important;
+  max-height: 600px !important;
   background-size: cover;
   overflow-y: scroll;
-  overflow-x: scroll;
   /* background-color: rgb(247, 247, 247); */
   background-image: url("https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80");
   background-repeat: no-repeat;
   border-radius: 3px;
   box-shadow: 2px 0 15px rgba(8, 255, 61, 0.527);
   border-radius: 20px;
-  overflow: hidden;
+  /* overflow: hidden; */
   transition: transform 0.4s ease-in-out;
   transform: translate3d(100%, -50%, 0);
 }
@@ -575,7 +572,7 @@ input::placeholder {
 
 .user_options-forms .forms_title {
   margin-bottom: 45px;
-  font-size: 3rem;
+  font-size: 1.6rem;
   font-weight: 900;
   line-height: 1em;
   text-transform: uppercase;
@@ -592,7 +589,7 @@ input::placeholder {
   border-bottom: 1px solid rgba(0, 0, 0, 0.705);
   padding: 6px 20px 6px 0;
   font-family: "Montserrat", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 300;
   color: rgb(152, 255, 56);
   letter-spacing: 0.1rem;
@@ -608,6 +605,7 @@ input::placeholder {
   justify-content: space-between;
   align-items: center;
   margin-top: 35px;
+  margin-bottom: 50px;
 }
 
 .forms_fieldset {
@@ -893,5 +891,28 @@ input::placeholder {
 @media only screen and (max-width: 700px) {
   .modal-content {
     width: 100%;
+  }
+  .sm {
+    display: inline-block;
+    width: auto;
+    margin: 20px auto;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .sm {
+    display: inline-block;
+    width: auto;
+    margin: 20px auto;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .sm {
+    display: inline-block;
+    width: auto;
+    margin: 20px auto;
+  }
+  .user_options-forms .user_forms-signup,
+  .user_options-forms .user_forms-login {
+    width: auto;
   }
 }
