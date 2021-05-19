@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-Criminal Detector Home Page
+Home
 {% endblock title %}
 {% block body %}
 <section class="container-fluid home pt-2 py-5 ">
@@ -203,37 +203,114 @@ Criminal Detector Home Page
         </table>
     </section>
 
-    <section class="container-fluid bg-white pb-5 px-5 my-4">
+    <section class="container-fluid bg-white pb-5 px-5 my-4 lh-1">
         <h1 class="fs-1 text-center py-5 fw-bolder" id="allC">All Criminals</h1>
-
-        <table class="table table-hover">
-            <thead>
-                <tr class="fs-5">
-                    <th scope="col">#</th>
-                    <th scope="col" class="col-md-2 text-left">Name</th>
-                    <th scope="col-12" class="col-md-auto text-left">Crime Detail</th>
-                    <th scope="col" class="col-md-2 text-left">Contact</th>
-                    <th scope="col" class="col-md-2 text-left">Relative Contact</th>
-                    <th scope="col" class="col-md-1 text-left">Gender</th>
-                    <th scope="col" class="col-md-1 text-left">Image</th>
+        <div class="table-responsive container-fluid">
+            <table class="table  table-hover overflow-auto" style="height: auto;">
+                <thead>
+                    <tr class="fs-5">
+                        <th scope="col" class="align-middle">#</th>
+                        <th scope="col" class="col-md-2 align-middle text-center">Name</th>
+                        <th scope="col" class="col-md-auto align-middle text-center">Crime Detail</th>
+                        <th scope="col" class="col-md-1 align-middle text-center">Contact</th>
+                        <th scope="col" class="col-md-1 align-middle text-center">Relative Contact</th>
+                        <th scope="col" class="col-md-1 align-middle text-center">Gender</th>
+                        <th scope="col" class="col-md-auto align-middle text-center">Address</th>
+                        <th scope="col" class="col-md-auto align-middle text-center">Image</th>
+                        <th scope="col" class=" align-middle text-center">Edit</th>
+                        <th scope="col" class="col-sm-auto align-middle text-center">Delete</th>
+                    </tr>
+                </thead>
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <img class="modal-content" id="img01">
+                    <div class="w3-xxlarge w3-text-red fw-bold" id="caption"></div>
+                </div>
+                {% for c in C %}
+                <tr class="fs-6 fw-bold">
+                    <th scope="row" class="text-center align-middle  fs-5">{{c.id}}</th>
+                    <td class="text-wrap text-center align-middle fs-5">{{c.name}}</td>
+                    <td class="text-center align-middle fs-5">{{c.crimeDetail}}</td>
+                    <td class=" text-center align-middle fs-5">{{c.contact}}</td>
+                    <td class=" text-center align-middle fs-5">{{c.relativeContact}}</td>
+                    <td class=" text-center align-middle fs-5">{{c.gender}}</td>
+                    <td class="text-center text-justify align-middle fs-5">{{c.address}}</td>
+                    <td class="w3-center"><img id="myImg" src="{{c.image.url}}"
+                            style="width: 150px !important; height: 150px!important; object-fit: cover;"
+                            class="img-thumbnail" alt="{{c.name}}"></td>
+                    <td onClick="document.location.href='edit/{{c.id}}';" style="cursor: pointer;"
+                        class="align-middle w3-center w3-hover-black"><a href='edit/{{c.id}}'><i
+                                class="fas fa-edit text-success fs-3"></i></a></td>
+                    <td onClick="document.location.href='delete/{{c.id}}';" style="cursor: pointer;"
+                        class="align-middle w3-center w3-hover-black"><a href='delete/{{c.id}}'><i
+                                class="fas fa-trash-alt text-danger fs-3 "></i></a>
+                    </td>
                 </tr>
-            </thead>
-            {% for c in C %}
-            <tr class="fs-6 fw-bold">
-                <th scope="row" class="text-left align-middle fs-5">{{c.id}}</th>
-                <td class="col-md-2 text-left align-middle fs-5">{{c.name}}</td>
-                <td class="col-md-auto text-left align-middle fs-5">{{c.crimeDetail}}</td>
-                <td class="col-md-2 text-left align-middle fs-5">{{c.contact}}</td>
-                <td class="col-md-2 text-left align-middle fs-5">{{c.relativeContact}}</td>
-                <td class="col-md-1 text-left align-middle fs-5">{{c.gender}}</td>
-                <td class=""><img src="{{c.image.url}}"
-                        style="width: 120px !important; height: 120px!important; object-fit: cover;"
-                        class="img-thumbnail" alt="{{c.name}}"></td>
-            </tr>
-            {% endfor %}
-            <tbody>
-        </table>
+                {% endfor %}
+                <tbody>
+            </table>
+        </div>
+        <!-- <div class="w3-responsive">
+            <table class="w3-table-all w3-large lh-1">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th class="lh-1">Crime Detail</th>
+                    <th>Contact</th>
+                    <th>Relative Contact</th>
+                    <th>Gender</th>
+                    <th>Address</th>
+                    <th>Image</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                {% for c in C %}
+                <tr>
+                    <td>{{c.id}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.crimeDetail}}</td>
+                    <td>{{c.contact}}</td>
+                    <td>{{c.relativeContact}}</td>
+                    <td>{{c.gender}}</td>
+                    <td>{{c.address}}</td>
+                    <td><img src="{{c.image.url}}"
+                            style="width: 120px !important; height: 120px!important; object-fit: cover;"
+                            class="img-thumbnail" alt="{{c.name}}"></td>
+                    <td onClick="document.location.href='edit/{{c.id}}';" style="cursor: pointer;"
+                        class="align-middle w3-center w3-hover-black"><a href='edit/{{c.id}}'><i
+                                class="fas fa-edit text-success fs-3"></i></a></td>
+                    <td onClick="document.location.href='delete/{{c.id}}';" style="cursor: pointer;"
+                        class="align-middle w3-center w3-hover-black"><a href='delete/{{c.id}}'><i
+                                class="fas fa-trash-alt text-danger fs-3 "></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div> -->
+
     </section>
 
 </section>
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+</script>
 {% endblock body %}

@@ -13,9 +13,9 @@ Criminal Detector Home Page
 
 
         <div class="btn-group  mx-sm-auto">
-            <a href="#regc" class="btn btn-success " aria-current="page">Register Criminal</a>
-            <a href="#searchC" class="btn btn-success">Search Criminal</a>
-            <a href="#allC" class="btn btn-success">See All Criminal</a>
+            <a href="./index#regc" class="btn btn-success " aria-current="page">Register Criminal</a>
+            <a href="./index#searchC" class="btn btn-success">Search Criminal</a>
+            <a href="./index#allC" class="btn btn-success">See All Criminal</a>
 
         </div>
         <div class="ms-md-auto text-md-start mt-1 ">
@@ -27,10 +27,16 @@ Criminal Detector Home Page
 
         </div>
 
-        <div class="ms-auto "><a href="logout"><button type="button" class="btn btn-success">LogOut</button></a></div>
+        <div class="ms-auto ">
+            <div onclick="document.location.href='../index';"
+                class="btn btn-outline-warning w3-hover-text-black fw-bold">Home</div>
+
+            <a href="logout"><button type="button" class="btn btn-success">LogOut</button></a>
+        </div>
 
     </nav>
     <section class="container bg-white py-5 pb-5 px-5 my-4">
+        <h1 class="fs-1 text-center pb-5 fw-bolder" id="allC">Search By Image</h1>
         <form class="form-inline" method="POST" action="sbp" enctype="multipart/form-data">
             {% csrf_token %}
 

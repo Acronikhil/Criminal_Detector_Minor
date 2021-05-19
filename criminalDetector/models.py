@@ -45,6 +45,12 @@ class MyAccountManagers(BaseUserManager):
         users.save(using=self._db)
         return users
 
+    def update(self, relativeContact, crimeDetail, address, contact):
+        update = self.update(contact=contact, relativeContact=relativeContact,
+                             crimeDetail=crimeDetail, address=address)
+        update.update(using=self.db)
+        return update
+
     def addImg(self, image):
         sImage = self.model(image=image)
         # print("Request to save image as:", image)
@@ -91,7 +97,7 @@ class police(models.Model):
 
 
 class criminal(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=120)
     image = models.ImageField(upload_to='Criminal_Images')
     # idCardImg = models.ImageField(upload_to='idCard')
     crimeDetail = models.CharField(max_length=5000)
@@ -102,6 +108,9 @@ class criminal(models.Model):
     address = models.CharField(max_length=500)
 
     objects = MyAccountManagers()
+
+    def __str__(self):
+        return self.name + ', Email: ' + self.crimeDetail
 
     def has_module_perms(self, app_lebel):
         return True
